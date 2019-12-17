@@ -1,9 +1,0 @@
-{
-  "private": true,
-  "name": "@slikts/soundboard",
-  "workspaces": [
-    "app",
-    "service"
-  ],
-  "scripts": {}
-}
