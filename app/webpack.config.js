@@ -42,7 +42,7 @@ module.exports = (env, argv) => {
     },
     externals: [
       function(_, request, callback) {
-        if (/^iohook|robotjs|lame|speaker$/.test(request)) {
+        if (/^iohook|robotjs$/.test(request)) {
           return callback(null, "commonjs " + request);
         }
         callback();

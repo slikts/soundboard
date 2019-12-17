@@ -30,7 +30,10 @@ import store from "./app/store";
 
 process.title = "My NodeGui App";
 
-const App = require("./app/App").default;
+// const App = require("./app/App").default;
+
+import App from "./app/App";
+
 Renderer.render(
   <Provider store={store}>
     <App />

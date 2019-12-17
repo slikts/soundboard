@@ -5,7 +5,9 @@ const lame = require("lame");
 const wav = require("wav");
 const portAudio = require("node-portaudio");
 
-const play = ({ filePath, deviceId = -1 }, onError = console.error) => {
+const { dispatch } = require("./util");
+
+const play = ({ filePath, deviceId = -1, id }) => {
   const reader = getReader(filePath);
   const fileStream = createReadStream(filePath);
 
@@ -14,7 +16,15 @@ const play = ({ filePath, deviceId = -1 }, onError = console.error) => {
       ...parseFormat(format),
       deviceId
     });
-    ao.on("error", onError);
+    reader.on("end", () => {
+      dispatch({
+        type: "playback/stop",
+        payload: {
+          filePath,
+          id
+        }
+      });
+    });
     reader.on("end", () => ao.end());
     reader.pipe(ao);
     ao.start();

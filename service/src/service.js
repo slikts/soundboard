@@ -1,4 +1,7 @@
+const portAudio = require("node-portaudio");
+
 const play = require("./play");
+const { dispatch } = require("./util");
 
 const service = () => {
   process.stdin.on("readable", () => {
@@ -10,19 +13,24 @@ const service = () => {
 
     const { type, payload } = JSON.parse(chunk);
 
-    if (type === "keybinds/play") {
-      play(payload, logError);
+    if (type === "playlist/play") {
+      play(payload);
     } else {
       throw Error(`Unknown action: ${chunk}`);
     }
   });
-};
 
-const logError = error => {
-  process.stdout.write({
-    type: "service/error",
-    error: true,
-    payload: error.message
+  dispatch({
+    type: "service/info",
+    payload: {
+      version: require("../package.json").version,
+      node: process.version
+    }
+  });
+
+  dispatch({
+    type: "service/devices",
+    payload: portAudio.getDevices()
   });
 };
 

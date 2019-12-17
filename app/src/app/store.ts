@@ -1,7 +1,7 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 import rootReducer from "./rootReducer";
-import { workerMiddleware } from "./worker";
+import { serviceMiddleware } from "./service";
 
 const store = configureStore({
   reducer: rootReducer

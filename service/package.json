@@ -2,24 +2,40 @@
   "name": "@slikts/soundboard-service",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "build": "nexe index.js"
+    "clean": "rimraf {service.exe,dist}",
+    "prebuild": "npm run clean && npm run bundle",
+    "build": "nexe dist/main.js",
+    "postbuild": "upx main.exe -o service.exe",
+    "bundle": "webpack --mode production",
+    "bundle:dev": "webpack --mode development",
+    "smoke": "node test/smokePlay.js",
+    "smoke:watch": "nodemon --exec npm run smoke",
+    "start": "node src/index.js",
+    "start:watch": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "nexe": "^3.3.2",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.0",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "lame": "^1.2.4",
     "node-portaudio": "^0.4.10",
     "wav": "^1.0.2"
   },
-  "homepage": "https://github.com/slikts/soundboard-service#readme",
+  "homepage": "https://github.com/slikts/soundboard#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/slikts/soundboard-service.git"
+    "url": "https://github.com/slikts/soundboard.git"
+  },
+  "engines": {
+    "node": "~10.16.0"
   }
 }
