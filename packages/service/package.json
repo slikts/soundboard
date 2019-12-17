@@ -1,0 +1,25 @@
+{
+  "name": "@slikts/soundboard-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "nexe index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "lame": "^1.2.4",
+    "node-portaudio": "^0.4.10",
+    "wav": "^1.0.2"
+  },
+  "homepage": "https://github.com/slikts/soundboard-service#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slikts/soundboard-service.git"
+  }
+}
