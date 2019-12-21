@@ -1,5 +1,5 @@
 import eventToStream from "./eventToStream";
-import EventEmitter, { once } from "events";
+import EventEmitter from "events";
 import { finished, collect } from ".";
 
 describe("event to node stream", () => {
@@ -14,5 +14,14 @@ describe("event to node stream", () => {
     emitter.emit(type, val2);
     emitter.emit(type, null);
     expect(await collect(stream)).toEqual([val1, val2]);
+  });
+
+  it("closes on error", async () => {
+    const emitter = new EventEmitter();
+    const stream = eventToStream("foo", emitter, "error");
+    emitter.emit("error", 123);
+    try {
+      await finished(stream);
+    } catch (e) {}
   });
 });
