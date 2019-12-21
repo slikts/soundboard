@@ -1,5 +1,5 @@
 import { Text, Window, hot, View } from "@nodegui/react-nodegui";
-import React from "react";
+import React, { useState } from "react";
 import { QIcon } from "@nodegui/nodegui";
 import path from "path";
 // TODO:
@@ -14,26 +14,25 @@ import { RootState } from "./rootReducer";
 
 const minSize = { width: 500, height: 520 };
 const winIcon = new QIcon(path.resolve(__dirname, nodeguiIcon));
-class App extends React.Component {
-  render() {
-    return (
-      <Window
-        windowIcon={winIcon}
-        windowTitle="xHello 👋🏽"
-        minSize={minSize}
-        styleSheet={styleSheet}
-      >
-        <View style={containerStyle}>
-          <SourceList />
-          <KeybindList />
-          <Text id="welcome-text">Helcome to NodeGuixx 🐕</Text>
-          <Text id="step-1">1. Play around</Text>
-          <Text id="step-2">2. Debug</Text>
-        </View>
-      </Window>
-    );
-  }
-}
+const App = () => {
+  const bla = useState(123);
+  return (
+    <Window
+      windowIcon={winIcon}
+      windowTitle="xHello 👋🏽"
+      minSize={minSize}
+      styleSheet={styleSheet}
+    >
+      <View style={containerStyle}>
+        <SourceList />
+        <KeybindList />
+        <Text id="welcome-text">Helcome to NodeGuixx 🐕</Text>
+        <Text id="step-1">1. Play around</Text>
+        <Text id="step-2">2. Debug</Text>
+      </View>
+    </Window>
+  );
+};
 
 const containerStyle = `
    flex: 1;

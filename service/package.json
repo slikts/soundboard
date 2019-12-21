@@ -4,10 +4,10 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "clean": "rimraf {service.exe,dist}",
+    "clean": "rimraf {tmp,dist}",
     "prebuild": "npm run clean && npm run bundle",
-    "build": "nexe dist/main.js",
-    "postbuild": "upx main.exe -o service.exe",
+    "build": "nexe dist/main.js -o tmp/service.exe",
+    "postbuild": "upx tmp/service.exe",
     "bundle": "webpack --mode production",
     "bundle:dev": "webpack --mode development",
     "smoke": "node test/smokePlay.js",

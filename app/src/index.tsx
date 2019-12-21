@@ -1,46 +1,22 @@
-import { Renderer } from "@nodegui/react-nodegui";
 import React from "react";
-
-const { spawn } = require("child_process");
-
-const fs = require("fs");
-
-import * as ioHook from "iohook";
-
-// @ts-ignore
-import * as robot from "robotjs";
-
-// let state = false;
-
-// setInterval(() => {
-//   // robot.keyToggle(a"a", state ? "up" : "down");
-//   state = !state;
-// }, 2000);
-
-// ioHook.on("keydown", event => {
-//   if (event.keycode === 82) {
-//     // ks.sendKey("a");
-//   }
-// });
-
-// ioHook.start(false);
+import { Renderer } from "@nodegui/react-nodegui";
+import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 
-import store from "./app/store";
+import App from "./app/App";
+import store, { persistor } from "./app/store";
 
 process.title = "My NodeGui App";
 
-// const App = require("./app/App").default;
-
-import App from "./app/App";
-
 Renderer.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
 
-// TODO:
+// TODO: fix
 if (process.env.NODE_ENV === "development" && module.hot) {
   module.hot.accept("./app/App", () => {
     Renderer.forceUpdate();

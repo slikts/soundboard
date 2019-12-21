@@ -1,17 +1,22 @@
-const { spawn } = require("child_process");
+import { spawn } from "child_process";
+
+// import { AsyncIterableX as AsyncIterable } from "ix/asynciterable";
+// import "ix/add/asynciterable-operators/foreach";
+
+import { Middleware, Action } from "redux";
 
 import { play, stop } from "../features/playlist/playlistSlice";
 
-export const serviceMiddleware = (
-  serviceArgs = ["C:\\work\\soundboard-server\\soundboard-server.exe"],
+export const getServiceMiddleware = (
+  serviceArgs: [string] = [
+    "C:\\work\\soundboard-server\\soundboard-server.exe"
+  ],
   _spawn = spawn
 ) => ({
   // getState,
   dispatch
 }: any) => {
   const service = _spawn(...serviceArgs);
-
-  console.log(123213);
 
   service.stdout.on("data", (data: any) => {
     console.log("stdout", data);
@@ -22,8 +27,6 @@ export const serviceMiddleware = (
     dispatch(JSON.parse(data));
   });
 
-  service.stdin.setEncoding("utf-8");
-
   return (next: any) => (action: any) => {
     const result = next(action);
 
@@ -32,4 +35,17 @@ export const serviceMiddleware = (
     }
     return result;
   };
+};
+
+export const iteratorMiddleware: Middleware = ({
+  dispatch
+}) => next => action => {
+  // if (Symbol.asyncIterator in action) {
+  //   AsyncIterable.from<Action>(action).forEach(x => {
+  //     dispatch(x);
+  //   });
+  //   return;
+  // }
+
+  return next(action);
 };

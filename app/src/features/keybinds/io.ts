@@ -1,4 +1,4 @@
-import * as ioHook from "iohook";
+import ioHook from "iohook";
 
 // let state = false;
 
@@ -18,7 +18,7 @@ export const ioMiddleware = ({ io = ioHook }: any = {}) => {
   let _state;
   let _dispatch;
 
-  io.on("keydown", event => {
+  io.on("keydown", (event: KeyboardEvent) => {
     console.log(event.keycode);
     if (keycodes.includes(event.keycode)) {
       // ks.sendKey("a");

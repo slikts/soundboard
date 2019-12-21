@@ -5,3 +5,7 @@ declare module "node-key-sender" {
 declare module "iohook" {
   export default any;
 }
+
+declare module "redux-node-logger" {
+  export default any;
+}
