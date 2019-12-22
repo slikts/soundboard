@@ -1,5 +1,5 @@
 import { Text, Window, hot, View } from "@nodegui/react-nodegui";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { QIcon } from "@nodegui/nodegui";
 import path from "path";
 // TODO:
@@ -11,11 +11,14 @@ import KeybindList from "../features/keybinds/KeybindList";
 
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./rootReducer";
+import store from "./store";
+import ioStream from "../features/keybinds/ioStream";
 
 const minSize = { width: 500, height: 520 };
 const winIcon = new QIcon(path.resolve(__dirname, nodeguiIcon));
 const App = () => {
-  const bla = useState(123);
+  useEffect(() => void store.dispatch(ioStream()));
+  // useEffect(() => void ioStream());
   return (
     <Window
       windowIcon={winIcon}

@@ -1,9 +1,10 @@
 import { Middleware, Action, AnyAction } from "redux";
 import { Readable } from "stream";
+import isStream from "is-stream";
 
 const streamMiddleware: StreamMiddleware = ({ dispatch }) => next => action => {
-  if (action instanceof Readable) {
-    action.on("data", chunk => void dispatch(chunk));
+  if (isStream(action)) {
+    action.on("data", (action: Action) => void dispatch(action));
     action.on(
       "error",
       (error: Error & { type: string }) =>

@@ -17,9 +17,11 @@
     "@reduxjs/toolkit": "^1.1.0",
     "@types/react-dom": "^16.9.4",
     "@types/react-redux": "^7.1.5",
+    "@types/through2": "^2.0.34",
     "appdata-path": "^1.0.0",
     "chokidar": "^3.3.0",
     "iohook": "^0.6.2",
+    "is-stream": "^2.0.0",
     "miss": "0.0.1",
     "node-key-sender": "^1.0.11",
     "open": "^7.0.0",
@@ -29,7 +31,8 @@
     "redux-node-logger": "^0.1.0",
     "redux-persist-node-storage": "^2.0.0",
     "redux-thunk": "^2.3.0",
-    "sanitize-filename": "^1.6.3"
+    "sanitize-filename": "^1.6.3",
+    "through2": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

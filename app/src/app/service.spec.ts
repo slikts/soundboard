@@ -34,6 +34,7 @@ describe("foo", () => {
       })
     );
     const actions = store.getActions();
+    // TODO:
     console.log(actions);
   });
 });

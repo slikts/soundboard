@@ -1,4 +1,5 @@
 import { spawn } from "child_process";
+import path from "path";
 
 // import { AsyncIterableX as AsyncIterable } from "ix/asynciterable";
 // import "ix/add/asynciterable-operators/foreach";
@@ -8,9 +9,7 @@ import { Middleware, Action } from "redux";
 import { play, stop } from "../features/playlist/playlistSlice";
 
 export const getServiceMiddleware = (
-  serviceArgs: [string] = [
-    "C:\\work\\soundboard-server\\soundboard-server.exe"
-  ],
+  serviceArgs: [string] = [path.join(__dirname, "../bin/service.exe")],
   _spawn = spawn
 ) => ({
   // getState,
@@ -18,14 +17,14 @@ export const getServiceMiddleware = (
 }: any) => {
   const service = _spawn(...serviceArgs);
 
-  service.stdout.on("data", (data: any) => {
-    console.log("stdout", data);
-    dispatch(JSON.parse(data));
-  });
-  service.stderr.on("data", (data: any) => {
-    console.log("stderr", data);
-    dispatch(JSON.parse(data));
-  });
+  // service.stdout.on("data", (data: any) => {
+  //   console.log("stdout", data);
+  //   dispatch(JSON.parse(data));
+  // });
+  // service.stderr.on("data", (data: any) => {
+  //   console.log("stderr", data);
+  //   dispatch(JSON.parse(data));
+  // });
 
   return (next: any) => (action: any) => {
     const result = next(action);

@@ -26,9 +26,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const _store = configureStore({
   reducer: persistedReducer,
   middleware: [
-    ...getDefaultMiddleware(),
     streamMiddleware,
-    getServiceMiddleware()
+    ...getDefaultMiddleware()
+    // getServiceMiddleware()
   ]
 });
 
